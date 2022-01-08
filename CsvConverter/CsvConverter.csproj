@@ -17,9 +17,4 @@
       <PackageReference Include="Microsoft.Extensions.Logging.Abstractions" Version="6.0.0" />
     </ItemGroup>
 
-    <ItemGroup>
-      <Folder Include="Readers" />
-      <Folder Include="Writers" />
-    </ItemGroup>
-
 </Project>

@@ -39,6 +39,8 @@ public class ConverterService
         {
             _logger.LogInformation($"{nameof(InputType)} was not provided. Using file extensions to determine type.");
         }
+        
+        // Create reader and writer from factory class
 
         await Task.CompletedTask;
     }

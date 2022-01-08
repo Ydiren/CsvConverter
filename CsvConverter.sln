@@ -7,6 +7,12 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CsvConverter", "CsvConverte
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CsvGenerator", "CsvGenerator\CsvGenerator.csproj", "{511D205C-FE76-4F70-BCDA-2A87D92F706C}"
 EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "UnitTests", "UnitTests", "{6BAD1239-2E4E-4EF1-AD6B-35ABE0ABEE0B}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Common.Tests", "Common.Tests\Common.Tests.csproj", "{62F897EE-5BEB-4729-9F59-FAB3B75D3DDA}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Common", "Common\Common.csproj", "{89B59167-5FAF-4428-8EA9-18A4E9092A36}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -24,5 +30,16 @@ Global
 		{511D205C-FE76-4F70-BCDA-2A87D92F706C}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{511D205C-FE76-4F70-BCDA-2A87D92F706C}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{511D205C-FE76-4F70-BCDA-2A87D92F706C}.Release|Any CPU.Build.0 = Release|Any CPU
+		{62F897EE-5BEB-4729-9F59-FAB3B75D3DDA}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{62F897EE-5BEB-4729-9F59-FAB3B75D3DDA}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{62F897EE-5BEB-4729-9F59-FAB3B75D3DDA}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{62F897EE-5BEB-4729-9F59-FAB3B75D3DDA}.Release|Any CPU.Build.0 = Release|Any CPU
+		{89B59167-5FAF-4428-8EA9-18A4E9092A36}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{89B59167-5FAF-4428-8EA9-18A4E9092A36}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{89B59167-5FAF-4428-8EA9-18A4E9092A36}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{89B59167-5FAF-4428-8EA9-18A4E9092A36}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{62F897EE-5BEB-4729-9F59-FAB3B75D3DDA} = {6BAD1239-2E4E-4EF1-AD6B-35ABE0ABEE0B}
 	EndGlobalSection
 EndGlobal
