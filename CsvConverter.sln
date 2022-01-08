@@ -5,6 +5,8 @@ VisualStudioVersion = 16.0.30114.105
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CsvConverter", "CsvConverter\CsvConverter.csproj", "{CBDAC1E3-E661-456E-AA99-4EC831620E4A}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CsvGenerator", "CsvGenerator\CsvGenerator.csproj", "{511D205C-FE76-4F70-BCDA-2A87D92F706C}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -18,5 +20,9 @@ Global
 		{CBDAC1E3-E661-456E-AA99-4EC831620E4A}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{CBDAC1E3-E661-456E-AA99-4EC831620E4A}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{CBDAC1E3-E661-456E-AA99-4EC831620E4A}.Release|Any CPU.Build.0 = Release|Any CPU
+		{511D205C-FE76-4F70-BCDA-2A87D92F706C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{511D205C-FE76-4F70-BCDA-2A87D92F706C}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{511D205C-FE76-4F70-BCDA-2A87D92F706C}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{511D205C-FE76-4F70-BCDA-2A87D92F706C}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 EndGlobal

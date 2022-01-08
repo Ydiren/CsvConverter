@@ -17,13 +17,15 @@ public class ConverterService
     [Required]
     public string Input { get; set; }
     
+    [Option(CommandOptionType.SingleOrNoValue)]
+    public string? InputType { get; set; }
+    
     [Argument(1)]
     [Required]
     public string Output { get; set; }
     
     [Option(CommandOptionType.SingleOrNoValue)]
-    public string? Type { get; set; }
-
+    public string? OutputType { get; set; }
     public async Task OnExecuteAsync()
     {
         await ConvertAsync(Input, Output);
@@ -31,7 +33,13 @@ public class ConverterService
     
     public async Task ConvertAsync(string input, string output)
     {
-        _logger.LogInformation($"{nameof(ConverterService)}.{nameof(ConvertAsync)} Called with input: '{input}', output: '{output}', type: '{Type ?? "<null>"}'.");
+        _logger.LogInformation($"{nameof(ConverterService)}.{nameof(ConvertAsync)} Called with input: '{input}', output: '{output}', type: '{InputType ?? "<null>"}'.");
+        
+        if (string.IsNullOrWhiteSpace(InputType))
+        {
+            _logger.LogInformation($"{nameof(InputType)} was not provided. Using file extensions to determine type.");
+        }
+
         await Task.CompletedTask;
     }
 }
