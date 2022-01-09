@@ -1,8 +1,11 @@
-namespace CsvConverter;
+using CsvConverter.Converter;
+
+namespace CsvConverter.Writers;
 
 public class JsonWriter : IWriter
 {
-    public void Write(object data)
+    public string Type { get; }
+    public void Write(IEnumerable<IDataNode> data)
     {
         throw new NotImplementedException();
     }

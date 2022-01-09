@@ -1,6 +1,9 @@
-namespace CsvConverter;
+using CsvConverter.Converter;
+
+namespace CsvConverter.Writers;
 
 public interface IWriter
 {
-    void Write(object data);
+    string Type { get; }
+    void Write(IEnumerable<IDataNode> data);
 }

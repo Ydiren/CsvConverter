@@ -1,14 +1,15 @@
 ﻿using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
+using Scrutor;
 
 namespace CsvConverter;
 
 internal class Program
 {
-    public static Task<int> Main(string[] args)
+    public static async Task<int> Main(string[] args)
     {
-        return CreateHostBuilder(args)
-            .RunCommandLineApplicationAsync<ConverterService>(args);
+        return await CreateHostBuilder(args)
+            .RunCommandLineApplicationAsync<Bootstrapper>(args);
     }
 
     private static IHostBuilder CreateHostBuilder(string[] args)
@@ -16,7 +17,14 @@ internal class Program
         return Host.CreateDefaultBuilder(args)
             .ConfigureServices((_, services) =>
             {
-                services.AddSingleton<ConverterService>();
+                services.AddSingleton<Bootstrapper>();
+
+                services.Scan(scan =>
+                    scan.FromAssemblyOf<Program>()
+                        .AddClasses()
+                        .UsingRegistrationStrategy(RegistrationStrategy.Append)
+                        .AsImplementedInterfaces()
+                        .WithSingletonLifetime());
             });
     }
 }

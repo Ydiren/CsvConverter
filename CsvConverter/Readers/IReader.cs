@@ -1,6 +1,10 @@
+using CsvConverter.Converter;
+
 namespace CsvConverter.Readers;
 
 public interface IReader
 {
-    object Read(string input);
+    string ReaderType { get; }
+    
+    IEnumerable<IDataNode> Read(string input);
 }
