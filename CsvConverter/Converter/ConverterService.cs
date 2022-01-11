@@ -24,13 +24,10 @@ public class ConverterService : IConverterService
 
     public async Task ConvertAsync(ConverterParameters parameters)
     {
-        _logger.LogInformation("{ClassName}.{MethodName} Called with input: '{Input}', output: '{Output}', input type: '{InputType}', output type: '{OutputType}'",
+        _logger.LogInformation("{ClassName}.{MethodName} Called with parameters: {parameters}",
                                nameof(ConverterService),
                                nameof(ConvertAsync),
-                               parameters.Input,
-                               parameters.Output,
-                               parameters.InputType,
-                               parameters.OutputType);
+                               parameters);
 
         // Retrieve reader and writer from repository class
         var reader = _readerRepository.Get(parameters.InputType);

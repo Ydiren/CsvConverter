@@ -1,17 +1,24 @@
 using System.IO.Abstractions;
-using System.Text.Json;
+using System.Security;
 using Common.Models;
 using CsvConverter.Interfaces;
+using Microsoft.Extensions.Logging;
 
 namespace CsvConverter.Json.Writers;
 
 public class JsonWriter : IWriter
 {
     private readonly IFileSystem _fileSystem;
+    private readonly IJsonSerializerService _jsonSerializerService;
+    private readonly ILogger<JsonWriter> _logger;
 
-    public JsonWriter(IFileSystem fileSystem)
+    public JsonWriter(IFileSystem fileSystem,
+                      IJsonSerializerService jsonSerializerService,
+                      ILogger<JsonWriter> logger)
     {
         _fileSystem = fileSystem;
+        _jsonSerializerService = jsonSerializerService;
+        _logger = logger;
     }
 
     public string Type => "json";
@@ -20,13 +27,19 @@ public class JsonWriter : IWriter
     {
         var filename = new FileName(outputFilename);
 
-        await using var fileStream = _fileSystem.FileStream.Create(filename.FullPath,
-                                                                   FileMode.Create);
-        await JsonSerializer.SerializeAsync(fileStream,
-                                            peopleDetails,
-                                            new JsonSerializerOptions
-                                            {
-                                                WriteIndented = true
-                                            });
+        try
+        {
+            await using var fileStream = _fileSystem.FileStream.Create(filename.FullPath,
+                                                                       FileMode.Create);
+
+            await _jsonSerializerService.Serialize(fileStream, peopleDetails);
+
+        }
+        catch (Exception e) when (e is SecurityException or UnauthorizedAccessException)
+        {
+            _logger.LogCritical(e,
+                                "You don't have access to the output location. '{Filename}'",
+                                filename);
+        }
     }
 }

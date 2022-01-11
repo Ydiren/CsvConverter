@@ -14,4 +14,9 @@ public class ConverterParameters
     public string InputType { get; }
     public string Output { get; }
     public string OutputType { get; }
+
+    public override string ToString()
+    {
+        return $"'input: {Input}', output: '{Output}', input type: '{InputType}', output type: '{OutputType}'";
+    }
 }
