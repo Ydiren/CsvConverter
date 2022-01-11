@@ -11,7 +11,7 @@ using FluentAssertions;
 using Moq;
 using NUnit.Framework;
 
-namespace CsvConverter.Tests.Readers.Csv;
+namespace CsvConverter.Tests.Csv.Readers;
 
 [TestFixture]
 public class CsvReaderTests : MockBase<CsvReader>

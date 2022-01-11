@@ -1,7 +1,7 @@
 using Common.Models;
 using CsvConverter.Interfaces;
 
-namespace CsvConverter.Writers.Json;
+namespace CsvConverter.Json.Writers;
 
 public class JsonWriter : IWriter
 {
