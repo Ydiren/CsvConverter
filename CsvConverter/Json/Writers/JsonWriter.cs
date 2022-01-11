@@ -33,7 +33,9 @@ public class JsonWriter : IWriter
                                                                        FileMode.Create);
 
             await _jsonSerializerService.Serialize(fileStream, peopleDetails);
-
+            _logger.LogInformation("Written {RecordCount} records to {Filename}",
+                                   peopleDetails.Count(),
+                                   filename);
         }
         catch (Exception e) when (e is SecurityException or UnauthorizedAccessException)
         {

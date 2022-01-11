@@ -1,7 +1,7 @@
 <component name="ProjectRunConfigurationManager">
   <configuration default="false" name="CsvGenerator" type="DotNetProject" factoryName=".NET Project">
-    <option name="EXE_PATH" value="$PROJECT_DIR$/CsvGenerator/bin/Debug/net6.0/CsvGenerator" />
-    <option name="PROGRAM_PARAMETERS" value="" />
+    <option name="EXE_PATH" value="$PROJECT_DIR$/CsvGenerator/bin/Debug/net6.0/CsvGenerator.exe" />
+    <option name="PROGRAM_PARAMETERS" value="10 ~/bogus.csv" />
     <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/CsvGenerator/bin/Debug/net6.0" />
     <option name="PASS_PARENT_ENVS" value="1" />
     <option name="USE_EXTERNAL_CONSOLE" value="0" />
