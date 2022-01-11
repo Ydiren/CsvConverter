@@ -2,11 +2,11 @@ using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Threading.Tasks;
-using Bogus;
 using Common.Models;
 using CsvConverter.Csv.Factories;
 using CsvConverter.Csv.Readers;
 using CsvConverter.Csv.Services;
+using CsvConverter.Tests.MockData;
 using FluentAssertions;
 using Moq;
 using NUnit.Framework;
@@ -93,7 +93,7 @@ public class CsvReaderTests : MockBase<CsvReader>
     public async Task ReadAsync_WhenCsvReaderServiceReturnsValidRows_ReturnsConvertedRows()
     {
         // Arrange
-        var mockCustomerRows = new MockDataGenerator().GenerateCustomers(3);
+        var mockCustomerRows = new MockDataGenerator().GenerateCustomerCsvRows(3);
         GetMock<ICsvReaderService>()
             .Setup(x => x.ReadAsync<CsvRow>(It.IsAny<FileName>()))
             .ReturnsAsync(mockCustomerRows);
@@ -104,22 +104,5 @@ public class CsvReaderTests : MockBase<CsvReader>
         // Assert
         result.Should()
               .HaveCount(3);
-    }
-}
-
-class MockDataGenerator
-{
-    public IEnumerable<CsvRow> GenerateCustomers(int count)
-    {
-        var customers = new Faker<CsvRow>().RuleFor(x => x.Name,
-                                                    f => f.Person.FullName)
-                                           .RuleFor(x => x.AddressLine1,
-                                                    f => f.Address.StreetAddress())
-                                           .RuleFor(x => x.AddressLine2,
-                                                    f => f.Address.City())
-                                           .RuleFor(x => x.AddressLine3,
-                                                    f => f.Address.Country());
-
-        return customers.Generate(count);
     }
 }

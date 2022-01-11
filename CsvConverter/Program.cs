@@ -1,4 +1,5 @@
-﻿using Microsoft.Extensions.DependencyInjection;
+﻿using System.IO.Abstractions;
+using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Scrutor;
 
@@ -18,6 +19,7 @@ internal class Program
                    .ConfigureServices((_, services) =>
                    {
                        services.AddSingleton<Bootstrapper>();
+                       services.AddSingleton<IFileSystem, FileSystem>();
 
                        services.Scan(scan => scan.FromAssemblyOf<Program>()
                                                  .AddClasses()
