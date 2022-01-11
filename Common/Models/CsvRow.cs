@@ -1,6 +1,6 @@
 using CsvHelper.Configuration.Attributes;
 
-namespace CsvGenerator.Models;
+namespace Common.Models;
 
 public class CsvRow
 {

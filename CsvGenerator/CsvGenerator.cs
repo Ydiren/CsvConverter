@@ -1,6 +1,6 @@
 using System.Globalization;
 using Common;
-using CsvGenerator.Models;
+using Common.Models;
 using CsvHelper;
 using McMaster.Extensions.CommandLineUtils;
 using Microsoft.Extensions.Logging;
@@ -34,7 +34,7 @@ public class CsvGenerator
 
     private async Task GenerateAsync()
     {
-        var filename = GetOutputFilename();
+        var filename = CreateOutputFilename();
         var numberOfRows = RowsToGenerate ?? 10;
         var customers = _rowGenerator.GenerateCustomers(numberOfRows);
 
@@ -57,7 +57,7 @@ public class CsvGenerator
         await csvWriter.WriteRecordsAsync(customers);
     }
 
-    private FileName GetOutputFilename()
+    private FileName CreateOutputFilename()
     {
         try
         {

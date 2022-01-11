@@ -1,6 +1,8 @@
 using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
+using Common;
+using Common.Models;
 using CsvConverter.Converter;
 using CsvConverter.Readers;
 using CsvConverter.Repositories;
@@ -87,9 +89,9 @@ internal class ConverterServiceTests : MockBase<ConverterService>
     {
         // Arrange
         var reader = GetMock<IReader>();
-        var readData = new List<IDataNode>();
+        var peopleDetails = new List<PersonDetail>();
         reader.Setup(x => x.Read(It.IsAny<string>()))
-            .Returns(readData);
+            .Returns(peopleDetails);
         GetMock<IReaderRepository>()
             .Setup(x => x.Get(It.IsAny<string>()))
             .Returns(reader.Object);
@@ -108,6 +110,6 @@ internal class ConverterServiceTests : MockBase<ConverterService>
             .Verify(x => x.Get(parameters.InputType), Times.Once);
         GetMock<IWriterRepository>()
             .Verify(x => x.Get(parameters.OutputType), Times.Once);
-        writer.Verify(x => x.Write(readData), Times.Once);
+        writer.Verify(x => x.Write(parameters.Output, peopleDetails), Times.Once);
     }
 }

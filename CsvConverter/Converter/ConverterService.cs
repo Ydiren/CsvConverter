@@ -31,8 +31,8 @@ public class ConverterService : IConverterService
         var reader = _readerRepository.Get(parameters.InputType);
         var writer = _writerRepository.Get(parameters.OutputType);
         
-        var readData = reader.Read(parameters.Input);
-        writer.Write(readData);
+        var peopleDetails = reader.Read(parameters.Input);
+        writer.Write(parameters.Output, peopleDetails);
         
         await Task.CompletedTask;
     }

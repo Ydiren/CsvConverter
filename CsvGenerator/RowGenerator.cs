@@ -1,5 +1,5 @@
 using Bogus;
-using CsvGenerator.Models;
+using Common.Models;
 
 namespace CsvGenerator;
 

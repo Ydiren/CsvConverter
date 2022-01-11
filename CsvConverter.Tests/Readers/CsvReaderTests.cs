@@ -1,4 +1,6 @@
+using System;
 using CsvConverter.Readers;
+using FluentAssertions;
 using NUnit.Framework;
 
 namespace CsvConverter.Tests.Readers;
@@ -7,8 +9,13 @@ namespace CsvConverter.Tests.Readers;
 public class CsvReaderTests : MockBase<CsvReader>
 {
     [Test]
-    public void Read_WhenInputIsNull_Throws()
+    public void Read_WhenInputIsEmpty_ThrowsArgumentException()
     {
-        Assert.Fail();
+        // Act
+        Action read = () => Subject.Read(string.Empty);
+        
+        // Assert
+        read.Should()
+            .Throw<ArgumentException>();
     }
 }

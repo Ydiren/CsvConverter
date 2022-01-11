@@ -1,4 +1,4 @@
-using CsvConverter.Converter;
+using Common.Models;
 
 namespace CsvConverter.Readers;
 
@@ -6,5 +6,5 @@ public interface IReader
 {
     string ReaderType { get; }
     
-    IEnumerable<IDataNode> Read(string input);
+    IEnumerable<PersonDetail> Read(string inputLocation);
 }
