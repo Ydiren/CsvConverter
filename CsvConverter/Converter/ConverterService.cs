@@ -14,9 +14,8 @@ public class ConverterService : IConverterService
     private readonly IReaderRepository _readerRepository;
     private readonly IWriterRepository _writerRepository;
 
-    public ConverterService(ILogger<ConverterService> logger,
-        IReaderRepository readerRepository,
-        IWriterRepository writerRepository)
+    public ConverterService(ILogger<ConverterService> logger, IReaderRepository readerRepository,
+                            IWriterRepository writerRepository)
     {
         _logger = logger;
         _readerRepository = readerRepository;
@@ -25,15 +24,20 @@ public class ConverterService : IConverterService
 
     public async Task ConvertAsync(ConverterParameters parameters)
     {
-        _logger.LogInformation($"{nameof(Bootstrapper)}.{nameof(ConvertAsync)} Called with input: '{parameters.Input}', output: '{parameters.Output}', input type: '{parameters.InputType}', output type: '{parameters.OutputType}'.");
+        _logger.LogInformation("{ClassName}.{MethodName} Called with input: '{Input}', output: '{Output}', input type: '{InputType}', output type: '{OutputType}'",
+                               nameof(ConverterService),
+                               nameof(ConvertAsync),
+                               parameters.Input,
+                               parameters.Output,
+                               parameters.InputType,
+                               parameters.OutputType);
 
         // Retrieve reader and writer from repository class
         var reader = _readerRepository.Get(parameters.InputType);
         var writer = _writerRepository.Get(parameters.OutputType);
-        
-        var peopleDetails = reader.Read(parameters.Input);
-        writer.Write(parameters.Output, peopleDetails);
-        
-        await Task.CompletedTask;
+
+        var peopleDetails = await reader.ReadAsync(parameters.Input);
+        await writer.WriteAsync(parameters.Output,
+                                peopleDetails);
     }
 }

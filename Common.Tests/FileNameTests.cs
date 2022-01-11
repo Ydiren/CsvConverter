@@ -1,4 +1,5 @@
 using System;
+using System.IO;
 using Common.Models;
 using FluentAssertions;
 using NUnit.Framework;
@@ -13,61 +14,89 @@ public class FileNameTests
     {
         // Act
         Action ctor = () => new FileName(null);
-        
+
         // Assert
         ctor.Should()
             .Throw<ArgumentNullException>();
     }
-    
+
     [Test]
     public void Ctor_WhenPathIsEmptyString_ThrowsArgumentException()
     {
         // Act
         Action ctor = () => new FileName(string.Empty);
-        
+
         // Assert
         ctor.Should()
             .Throw<ArgumentException>();
     }
-    
+
     [Test]
     public void Ctor_WhenPathIsWhitespace_ThrowsArgumentException()
     {
         // Act
         Action ctor = () => new FileName("    ");
-        
+
         // Assert
         ctor.Should()
             .Throw<ArgumentException>();
     }
-    
+
     [Test]
     public void FullPath_WhenPathStartsWithTilde_ReplacesTildeWithUserProfileDirectory()
     {
         // Arrange
         var filepath = "~/bogus.csv";
-            
+
         // Act
         var filename = new FileName(filepath);
-        
+
         // Assert
         filename.FullPath.Should()
-            .NotContain("~");
+                .NotContain("~");
         filename.FullPath.Should()
-            .StartWith(Environment.GetFolderPath(Environment.SpecialFolder.UserProfile));
+                .StartWith(Environment.GetFolderPath(Environment.SpecialFolder.UserProfile));
     }
-    
+
+    [Test]
+    public void FullPath_WhenPathContainsInvalidPathCharacters_ThrowsArgumentException()
+    {
+        // Arrange
+        var filepath = new string(Path.GetInvalidPathChars());
+
+        // Act
+        Action ctor = () => new FileName(filepath);
+
+        // Assert
+        ctor.Should()
+            .Throw<ArgumentException>();
+    }
+
+    [Test]
+    public void FullPath_WhenPathContainsInvalidFilenameCharacters_ThrowsArgumentException()
+    {
+        // Arrange
+        var filepath = new string(Path.GetInvalidFileNameChars());
+
+        // Act
+        Action ctor = () => new FileName(filepath);
+
+        // Assert
+        ctor.Should()
+            .Throw<ArgumentException>();
+    }
+
     [Test]
     public void ToString_ReturnsFullPathProperty()
     {
         // Arrange
         var filepath = "/bogus.csv";
-            
+
         // Act
         var filename = new FileName(filepath);
-        
+
         // Assert
         filename.FullPath.Should()
-            .Be(filename.ToString());
+                .Be(filename.ToString());
     }
 }

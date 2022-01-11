@@ -1,5 +1,5 @@
 using System;
-using CsvConverter.Readers;
+using CsvConverter.Interfaces;
 using CsvConverter.Repositories;
 using FluentAssertions;
 using Moq;
@@ -15,10 +15,10 @@ public class ReaderRepositoryTests : MockBase<ReaderRepository>
     {
         // Act
         var add = () => Subject.Add(null);
-        
+
         // Assert
         add.Should()
-            .Throw<ArgumentNullException>();
+           .Throw<ArgumentNullException>();
     }
 
     [Test]
@@ -27,13 +27,13 @@ public class ReaderRepositoryTests : MockBase<ReaderRepository>
         // Arrange
         var expectedReader = Mock.Of<IReader>(x => x.ReaderType == "csv");
         Subject.Add(expectedReader);
-        
+
         // Act
         var reader = Subject.Get("csv");
-        
+
         // Assert
         reader.Should()
-            .Be(expectedReader);
+              .Be(expectedReader);
     }
 
     [Test]
@@ -41,9 +41,9 @@ public class ReaderRepositoryTests : MockBase<ReaderRepository>
     {
         // Act
         Action get = () => Subject.Get("unsupportedType");
-        
+
         // Assert
         get.Should()
-            .Throw<InvalidOperationException>();
+           .Throw<InvalidOperationException>();
     }
 }

@@ -9,22 +9,21 @@ internal class Program
     public static async Task<int> Main(string[] args)
     {
         return await CreateHostBuilder(args)
-            .RunCommandLineApplicationAsync<Bootstrapper>(args);
+                   .RunCommandLineApplicationAsync<Bootstrapper>(args);
     }
 
     private static IHostBuilder CreateHostBuilder(string[] args)
     {
         return Host.CreateDefaultBuilder(args)
-            .ConfigureServices((_, services) =>
-            {
-                services.AddSingleton<Bootstrapper>();
+                   .ConfigureServices((_, services) =>
+                   {
+                       services.AddSingleton<Bootstrapper>();
 
-                services.Scan(scan =>
-                    scan.FromAssemblyOf<Program>()
-                        .AddClasses()
-                        .UsingRegistrationStrategy(RegistrationStrategy.Append)
-                        .AsImplementedInterfaces()
-                        .WithSingletonLifetime());
-            });
+                       services.Scan(scan => scan.FromAssemblyOf<Program>()
+                                                 .AddClasses()
+                                                 .UsingRegistrationStrategy(RegistrationStrategy.Append)
+                                                 .AsImplementedInterfaces()
+                                                 .WithSingletonLifetime());
+                   });
     }
 }

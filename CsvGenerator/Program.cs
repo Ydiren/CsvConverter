@@ -14,9 +14,6 @@ internal class Program
     private static IHostBuilder CreateHostBuilder(string[] args)
     {
         return Host.CreateDefaultBuilder(args)
-            .ConfigureServices((_, services) =>
-            {
-                services.AddSingleton<IRowGenerator, RowGenerator>();
-            });
+                   .ConfigureServices((_, services) => { services.AddSingleton<IRowGenerator, RowGenerator>(); });
     }
 }

@@ -1,5 +1,4 @@
 using System.Globalization;
-using Common;
 using Common.Models;
 using CsvHelper;
 using McMaster.Extensions.CommandLineUtils;
@@ -10,9 +9,9 @@ namespace CsvGenerator;
 public class CsvGenerator
 {
     private const string DefaultOutputFilename = "test.csv";
-    
-    private readonly IRowGenerator _rowGenerator;
     private readonly ILogger<CsvGenerator> _logger;
+
+    private readonly IRowGenerator _rowGenerator;
 
     public CsvGenerator(IRowGenerator rowGenerator, ILogger<CsvGenerator> logger)
     {
@@ -21,11 +20,9 @@ public class CsvGenerator
         OutputFile = string.Empty;
     }
 
-    [Argument(0)]
-    private int? RowsToGenerate { get; set; }
-    
-    [Argument(1)]
-    private string OutputFile { get; set; }
+    [Argument(0)] private int? RowsToGenerate { get; set; }
+
+    [Argument(1)] private string OutputFile { get; }
 
     public async Task OnExecuteAsync()
     {
@@ -40,20 +37,26 @@ public class CsvGenerator
 
         try
         {
-            await WriteCsvFile(filename, customers);
+            await WriteCsvFile(filename,
+                               customers);
 
-            _logger.LogInformation($"Successfully written {numberOfRows} rows to '{filename}'");
+            _logger.LogInformation("Successfully written {NumberOfRows} rows to '{Filename}'",
+                                   numberOfRows,
+                                   filename);
         }
         catch (Exception exception)
         {
-            _logger.LogCritical(exception, $"Failed to create output file '{filename}'");
+            _logger.LogCritical(exception,
+                                "Failed to create output file '{Filename}'",
+                                filename);
         }
     }
 
     private static async Task WriteCsvFile(FileName filename, IEnumerable<CsvRow> customers)
     {
         await using var writer = new StreamWriter(filename.FullPath);
-        await using var csvWriter = new CsvWriter(writer, CultureInfo.InvariantCulture);
+        await using var csvWriter = new CsvWriter(writer,
+                                                  CultureInfo.InvariantCulture);
         await csvWriter.WriteRecordsAsync(customers);
     }
 
@@ -65,7 +68,9 @@ public class CsvGenerator
         }
         catch (ArgumentNullException)
         {
-            _logger.LogInformation($"{nameof(OutputFile)} is invalid. Writing to '{DefaultOutputFilename}' by default.");
+            _logger.LogInformation("{OutputFile} is invalid. Writing to '{DefaultOutputFilename}' by default",
+                                   OutputFile,
+                                   DefaultOutputFilename);
             return new FileName(DefaultOutputFilename);
         }
     }

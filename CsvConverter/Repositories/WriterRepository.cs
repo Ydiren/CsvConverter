@@ -1,4 +1,4 @@
-using CsvConverter.Writers;
+using CsvConverter.Interfaces;
 
 namespace CsvConverter.Repositories;
 
@@ -14,15 +14,15 @@ public class WriterRepository : IWriterRepository
     {
         ArgumentNullException.ThrowIfNull(writer);
 
-        _writers.Add(writer.Type, writer);
+        _writers.Add(writer.Type,
+                     writer);
     }
 
     public IWriter Get(string type)
     {
-        if (!_writers.TryGetValue(type, out var writer))
-        {
+        if (!_writers.TryGetValue(type,
+                                  out var writer))
             throw new InvalidOperationException($"Unsupported writer type: '{type}'.");
-        }
 
         return writer;
     }

@@ -1,6 +1,5 @@
-
 using System;
-using CsvConverter.Writers;
+using CsvConverter.Interfaces;
 using CsvConverter.Repositories;
 using FluentAssertions;
 using Moq;
@@ -16,10 +15,10 @@ public class WriterRepositoryTests : MockBase<WriterRepository>
     {
         // Act
         var add = () => Subject.Add(null);
-        
+
         // Assert
         add.Should()
-            .Throw<ArgumentNullException>();
+           .Throw<ArgumentNullException>();
     }
 
     [Test]
@@ -28,13 +27,13 @@ public class WriterRepositoryTests : MockBase<WriterRepository>
         // Arrange
         var expectedWriter = Mock.Of<IWriter>(x => x.Type == "csv");
         Subject.Add(expectedWriter);
-        
+
         // Act
         var writer = Subject.Get("csv");
-        
+
         // Assert
         writer.Should()
-            .Be(expectedWriter);
+              .Be(expectedWriter);
     }
 
     [Test]
@@ -42,9 +41,9 @@ public class WriterRepositoryTests : MockBase<WriterRepository>
     {
         // Act
         Action get = () => Subject.Get("unsupportedType");
-        
+
         // Assert
         get.Should()
-            .Throw<InvalidOperationException>();
+           .Throw<InvalidOperationException>();
     }
 }

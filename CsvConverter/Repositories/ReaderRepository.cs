@@ -1,4 +1,4 @@
-using CsvConverter.Readers;
+using CsvConverter.Interfaces;
 
 namespace CsvConverter.Repositories;
 
@@ -14,15 +14,15 @@ public class ReaderRepository : IReaderRepository
     {
         ArgumentNullException.ThrowIfNull(reader);
 
-        _readers.Add(reader.ReaderType, reader);
+        _readers.Add(reader.ReaderType,
+                     reader);
     }
 
     public IReader Get(string type)
     {
-        if (!_readers.TryGetValue(type, out var reader))
-        {
+        if (!_readers.TryGetValue(type,
+                                  out var reader))
             throw new InvalidOperationException($"Unsupported reader type: '{type}");
-        }
 
         return reader;
     }

@@ -12,10 +12,9 @@ public class FileName
 
         var fullPath = path;
         if (fullPath.StartsWith('~'))
-        {
-            fullPath = fullPath.Replace("~", Environment.GetFolderPath(Environment.SpecialFolder.UserProfile));
-        }
-        
+            fullPath = fullPath.Replace("~",
+                                        Environment.GetFolderPath(Environment.SpecialFolder.UserProfile));
+
         FullPath = Path.GetFullPath(fullPath);
     }
 
