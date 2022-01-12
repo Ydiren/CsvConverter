@@ -4,11 +4,14 @@ namespace CsvConverter.Repositories;
 
 public interface IReaderRepository : IRepository<IReader>
 {
+    IEnumerable<string> SupportedTypes { get; }
 }
 
 public class ReaderRepository : IReaderRepository
 {
     private readonly Dictionary<string, IReader> _readers = new();
+
+    public IEnumerable<string> SupportedTypes => _readers.Keys.ToList();
 
     public void Add(IReader reader)
     {

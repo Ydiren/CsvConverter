@@ -15,6 +15,9 @@ public class WriterRepositoryInitializer : IRepositoryInitializer
 
     public void InitializeAll()
     {
-        foreach (var writer in _writers) _writerRepository.Add(writer);
+        foreach (var writer in _writers)
+        {
+            _writerRepository.Add(writer);
+        }
     }
 }

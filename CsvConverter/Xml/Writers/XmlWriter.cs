@@ -12,7 +12,7 @@ public class XmlWriter : IWriter
     private readonly IFileSystem _fileSystem;
     private readonly ILogger<XmlWriter> _logger;
     private readonly IXmlSerializationService _xmlSerializationService;
-    public string Type => "xml";
+    public string WriterType => "xml";
 
     public XmlWriter(IFileSystem fileSystem,
                      ILogger<XmlWriter> logger, 

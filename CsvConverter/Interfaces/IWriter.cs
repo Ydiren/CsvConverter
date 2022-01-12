@@ -4,6 +4,6 @@ namespace CsvConverter.Interfaces;
 
 public interface IWriter
 {
-    string Type { get; }
+    string WriterType { get; }
     Task WriteAsync(string outputFilename, IEnumerable<PersonDetail> peopleDetails);
 }

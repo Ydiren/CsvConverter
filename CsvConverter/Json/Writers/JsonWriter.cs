@@ -21,7 +21,7 @@ public class JsonWriter : IWriter
         _logger = logger;
     }
 
-    public string Type => "json";
+    public string WriterType => "json";
 
     public async Task WriteAsync(string outputFilename, IEnumerable<PersonDetail> peopleDetails)
     {

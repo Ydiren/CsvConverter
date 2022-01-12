@@ -46,4 +46,42 @@ public class ReaderRepositoryTests : MockBase<ReaderRepository>
         get.Should()
            .Throw<InvalidOperationException>();
     }
+
+    [Test]
+    public void SupportedTypes_WhenNoReadersAdded_ReturnsEmptyCollection()
+    {
+        // Assert
+        Subject.SupportedTypes.Should()
+               .BeEmpty();
+    }
+
+    [Test]
+    public void SupportedTypes_WhenSingleReadersAdded_ReturnsCollectionWithSingleEntry()
+    {
+        // Arrange
+        var reader = Mock.Of<IReader>(x => x.ReaderType == "abc");
+        Subject.Add(reader);
+        
+        // Assert
+        Subject.SupportedTypes.Should()
+               .BeEquivalentTo(reader.ReaderType);
+    }
+    
+    [Test]
+    public void SupportedTypes_WhenMultipleReadersAdded_ReturnsCollectionWithEntryForEachReader()
+    {
+        // Arrange
+        var reader1 = Mock.Of<IReader>(x => x.ReaderType == "abc");
+        var reader2 = Mock.Of<IReader>(x => x.ReaderType == "def");
+        var reader3 = Mock.Of<IReader>(x => x.ReaderType == "123");
+        Subject.Add(reader1);
+        Subject.Add(reader2);
+        Subject.Add(reader3);
+        
+        // Assert
+        Subject.SupportedTypes.Should()
+               .BeEquivalentTo(reader1.ReaderType,
+                               reader2.ReaderType,
+                               reader3.ReaderType);
+    }
 }

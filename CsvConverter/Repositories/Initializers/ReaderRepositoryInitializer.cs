@@ -15,6 +15,9 @@ public class ReaderRepositoryInitializer : IRepositoryInitializer
 
     public void InitializeAll()
     {
-        foreach (var reader in _readers) _readerRepository.Add(reader);
+        foreach (var reader in _readers)
+        {
+            _readerRepository.Add(reader);
+        }
     }
 }

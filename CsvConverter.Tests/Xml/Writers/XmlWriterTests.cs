@@ -43,10 +43,10 @@ public class XmlWriterTests : MockBase<XmlWriter>
     }
 
     [Test]
-    public void Type_ReturnsXml()
+    public void WriterType_ReturnsXml()
     {
         // Assert
-        Subject.Type.Should()
+        Subject.WriterType.Should()
                .Be("xml");
     }
     

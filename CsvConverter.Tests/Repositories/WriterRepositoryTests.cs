@@ -25,7 +25,7 @@ public class WriterRepositoryTests : MockBase<WriterRepository>
     public void Get_WhenTypeIsSupported_ReturnsExpectedWriterInstance()
     {
         // Arrange
-        var expectedWriter = Mock.Of<IWriter>(x => x.Type == "csv");
+        var expectedWriter = Mock.Of<IWriter>(x => x.WriterType == "csv");
         Subject.Add(expectedWriter);
 
         // Act
@@ -45,5 +45,43 @@ public class WriterRepositoryTests : MockBase<WriterRepository>
         // Assert
         get.Should()
            .Throw<InvalidOperationException>();
+    }
+
+    [Test]
+    public void SupportedTypes_WhenNoReadersAdded_ReturnsEmptyCollection()
+    {
+        // Assert
+        Subject.SupportedTypes.Should()
+               .BeEmpty();
+    }
+
+    [Test]
+    public void SupportedTypes_WhenSingleReadersAdded_ReturnsCollectionWithSingleEntry()
+    {
+        // Arrange
+        var writer = Mock.Of<IWriter>(x => x.WriterType == "abc");
+        Subject.Add(writer);
+        
+        // Assert
+        Subject.SupportedTypes.Should()
+               .BeEquivalentTo(writer.WriterType);
+    }
+    
+    [Test]
+    public void SupportedTypes_WhenMultipleReadersAdded_ReturnsCollectionWithEntryForEachReader()
+    {
+        // Arrange
+        var writer1 = Mock.Of<IWriter>(x => x.WriterType == "abc");
+        var writer2 = Mock.Of<IWriter>(x => x.WriterType == "def");
+        var writer3 = Mock.Of<IWriter>(x => x.WriterType == "123");
+        Subject.Add(writer1);
+        Subject.Add(writer2);
+        Subject.Add(writer3);
+        
+        // Assert
+        Subject.SupportedTypes.Should()
+               .BeEquivalentTo(writer1.WriterType,
+                               writer2.WriterType,
+                               writer3.WriterType);
     }
 }

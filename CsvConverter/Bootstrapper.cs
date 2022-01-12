@@ -11,15 +11,23 @@ internal class Bootstrapper
     private readonly CommandLineApplication _application;
     private readonly IConverterService _converterService;
     private readonly ILogger<Bootstrapper> _logger;
-    private readonly IEnumerable<IRepositoryInitializer> _repositoryInitializers;
 
-    public Bootstrapper(CommandLineApplication application, IConverterService converterService,
-                        IEnumerable<IRepositoryInitializer> repositoryInitializers, ILogger<Bootstrapper> logger)
+    public Bootstrapper(CommandLineApplication application,
+                        IConverterService converterService,
+                        ICustomHelpTextGenerator helpTextGenerator,
+                        IEnumerable<IRepositoryInitializer> repositoryInitializers,
+                        ILogger<Bootstrapper> logger)
     {
         _application = application;
         _converterService = converterService;
-        _repositoryInitializers = repositoryInitializers;
         _logger = logger;
+
+        foreach (var initializer in repositoryInitializers)
+        {
+            initializer.InitializeAll();
+        }
+        
+        helpTextGenerator.AddToCommandLine(_application);
     }
 
     [Argument(0)] [Required] public string Input { get; set; } = string.Empty;
@@ -36,8 +44,6 @@ internal class Bootstrapper
 
     public async Task OnExecuteAsync()
     {
-        foreach (var initializer in _repositoryInitializers) initializer.InitializeAll();
-
         try
         {
             var parameters = new ConverterParameters(Input,

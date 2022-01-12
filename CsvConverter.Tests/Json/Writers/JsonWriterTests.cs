@@ -42,10 +42,10 @@ public class JsonWriterTests : MockBase<JsonWriter>
     }
 
     [Test]
-    public void Type_ReturnsJson()
+    public void WriterType_ReturnsJson()
     {
         // Assert
-        Subject.Type.Should()
+        Subject.WriterType.Should()
                .Be("json");
     }
     [Test]

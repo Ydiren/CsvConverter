@@ -4,17 +4,20 @@ namespace CsvConverter.Repositories;
 
 public interface IWriterRepository : IRepository<IWriter>
 {
+    IEnumerable<string> SupportedTypes { get; }
 }
 
 public class WriterRepository : IWriterRepository
 {
     private readonly Dictionary<string, IWriter> _writers = new();
 
+    public IEnumerable<string> SupportedTypes => _writers.Keys.ToList();
+
     public void Add(IWriter writer)
     {
         ArgumentNullException.ThrowIfNull(writer);
 
-        _writers.Add(writer.Type,
+        _writers.Add(writer.WriterType,
                      writer);
     }
 

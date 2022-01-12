@@ -1,7 +1,7 @@
 <component name="ProjectRunConfigurationManager">
   <configuration default="false" name="CsvConverter" type="DotNetProject" factoryName=".NET Project">
     <option name="EXE_PATH" value="$PROJECT_DIR$/CsvConverter/bin/Debug/net6.0/CsvConverter.exe" />
-    <option name="PROGRAM_PARAMETERS" value="--input-type csv ~/bogus.csv  --output-type xml ~/bogus.xml" />
+    <option name="PROGRAM_PARAMETERS" value=" ~/bogus.csv  --output-type xml ~/bogus.xml" />
     <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/CsvConverter/bin/Debug/net6.0" />
     <option name="PASS_PARENT_ENVS" value="1" />
     <option name="USE_EXTERNAL_CONSOLE" value="0" />
