@@ -2,12 +2,12 @@
 
 namespace CsvConverter.Json.Writers;
 
-public interface IJsonSerializerService
+public interface IJsonSerializationService
 {
     Task Serialize<T>(Stream outputStream, T data);
 }
 
-public class JsonSerializerService : IJsonSerializerService
+public class JsonSerializationService : IJsonSerializationService
 {
     public async Task Serialize<T>(Stream outputStream, T data)
     {

@@ -9,15 +9,15 @@ namespace CsvConverter.Json.Writers;
 public class JsonWriter : IWriter
 {
     private readonly IFileSystem _fileSystem;
-    private readonly IJsonSerializerService _jsonSerializerService;
+    private readonly IJsonSerializationService _jsonSerializationService;
     private readonly ILogger<JsonWriter> _logger;
 
     public JsonWriter(IFileSystem fileSystem,
-                      IJsonSerializerService jsonSerializerService,
+                      IJsonSerializationService jsonSerializationService,
                       ILogger<JsonWriter> logger)
     {
         _fileSystem = fileSystem;
-        _jsonSerializerService = jsonSerializerService;
+        _jsonSerializationService = jsonSerializationService;
         _logger = logger;
     }
 
@@ -32,7 +32,7 @@ public class JsonWriter : IWriter
             await using var fileStream = _fileSystem.FileStream.Create(filename.FullPath,
                                                                        FileMode.Create);
 
-            await _jsonSerializerService.Serialize(fileStream, peopleDetails);
+            await _jsonSerializationService.Serialize(fileStream, peopleDetails);
             _logger.LogInformation("Written {RecordCount} records to {Filename}",
                                    peopleDetails.Count(),
                                    filename);

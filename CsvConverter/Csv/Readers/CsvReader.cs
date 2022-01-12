@@ -29,6 +29,10 @@ public class CsvReader : IReader
         try
         {
             var csvRows = await _csvReaderService.ReadAsync<CsvRow>(filename);
+            
+            _logger.LogInformation("Read {RecordCount} records from {Filename}",
+                                   csvRows.Count(),
+                                   filename);
 
             var peopleDetails = csvRows.Select(row => _personDetailsFactory.Create(row))
                                        .ToList();

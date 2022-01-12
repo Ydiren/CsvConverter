@@ -1,20 +1,21 @@
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.IO;
 using System.IO.Abstractions;
 using System.Security;
 using System.Threading.Tasks;
 using Common.Models;
-using CsvConverter.Json.Writers;
 using CsvConverter.Tests.MockData;
+using CsvConverter.Xml.Services;
+using CsvConverter.Xml.Writers;
 using FluentAssertions;
 using Moq;
 using NUnit.Framework;
 
-namespace CsvConverter.Tests.Json.Writers;
+namespace CsvConverter.Tests.Xml.Writers;
 
 [TestFixture]
-public class JsonWriterTests : MockBase<JsonWriter>
+public class XmlWriterTests : MockBase<XmlWriter>
 {
     private Mock<IFileSystem> _mockFileSystem = null!;
     private MemoryStream _fakeFileStream = null!;
@@ -42,12 +43,13 @@ public class JsonWriterTests : MockBase<JsonWriter>
     }
 
     [Test]
-    public void Type_ReturnsJson()
+    public void Type_ReturnsXml()
     {
         // Assert
         Subject.Type.Should()
-               .Be("json");
+               .Be("xml");
     }
+    
     [Test]
     public async Task WriteAsync_WhenOutputFilenameIsInvalid_ThrowsArgumentException()
     {
@@ -64,32 +66,32 @@ public class JsonWriterTests : MockBase<JsonWriter>
     public async Task WriteAsync_WhenUserDoesntHaveAccessToOutputFilename_DoesNotThrow()
     {
         // Arrange
-        var outputFilename = @"c:\json\output.json";
+        var outputFilename = @"c:\json\output.xml";
         var peopleDetails = new MockDataGenerator().GeneratePeopleDetails(3);
         _mockFileSystem.Setup(x => x.FileStream.Create(outputFilename, FileMode.Create))
                        .Throws<SecurityException>();
 
         // Act
         Func<Task> writeAsync = async () => await Subject.WriteAsync(outputFilename,
-                                 peopleDetails);
+                                                                     peopleDetails);
 
         // Assert
         await writeAsync.Should()
                         .NotThrowAsync<SecurityException>();
     }
-
+    
     [Test]
     public async Task WriteAsync_WhenOutputFileIsReadOnly_DoesNotThrow()
     {
         // Arrange
-        var outputFilename = @"c:\json\output.json";
+        var outputFilename = @"c:\json\output.xml";
         var peopleDetails = new MockDataGenerator().GeneratePeopleDetails(3);
         _mockFileSystem.Setup(x => x.FileStream.Create(outputFilename, FileMode.Create))
                        .Throws<UnauthorizedAccessException>();
 
         // Act
         Func<Task> writeAsync = async () => await Subject.WriteAsync(outputFilename,
-                                 peopleDetails);
+                                                                     peopleDetails);
 
         // Assert
         await writeAsync.Should()
@@ -97,18 +99,18 @@ public class JsonWriterTests : MockBase<JsonWriter>
     }
 
     [Test]
-    public async Task WriteAsync_WhenOutputFileIsValidAndUserHasAccess_SerializesObjectToJsonFile()
+    public async Task WriteAsync_WhenOutputFileIsValidAndUserHasAccess_SerializesObjectToXmlFile()
     {
         // Arrange
         var outputFilename = @"c:\json\output.json";
         var peopleDetails = new MockDataGenerator().GeneratePeopleDetails(3);
 
         // Act
-         await Subject.WriteAsync(outputFilename,
+        await Subject.WriteAsync(outputFilename,
                                  peopleDetails);
 
         // Assert
-        GetMock<IJsonSerializationService>()
+        GetMock<IXmlSerializationService>()
             .Verify(x => x.Serialize(_fakeFileStream, peopleDetails), Times.Once);
     }
 }
