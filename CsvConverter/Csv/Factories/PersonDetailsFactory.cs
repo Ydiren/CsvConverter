@@ -2,12 +2,12 @@ using Common.Models;
 
 namespace CsvConverter.Csv.Factories;
 
-public interface IPersonDetailsFactory
+internal interface IPersonDetailsFactory
 {
     PersonDetail Create(CsvRow row);
 }
 
-public class PersonDetailsFactory : IPersonDetailsFactory
+internal class PersonDetailsFactory : IPersonDetailsFactory
 {
     public PersonDetail Create(CsvRow row)
     {

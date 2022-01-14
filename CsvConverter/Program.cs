@@ -22,7 +22,7 @@ internal class Program
                        services.AddSingleton<IFileSystem, FileSystem>();
 
                        services.Scan(scan => scan.FromAssemblyOf<Program>()
-                                                 .AddClasses()
+                                                 .AddClasses(publicOnly: false)
                                                  .UsingRegistrationStrategy(RegistrationStrategy.Append)
                                                  .AsImplementedInterfaces()
                                                  .WithSingletonLifetime());

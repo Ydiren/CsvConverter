@@ -9,7 +9,7 @@ public interface ICustomHelpTextGenerator
     void AddToCommandLine(CommandLineApplication application);
 }
 
-public class CustomHelpTextGenerator : ICustomHelpTextGenerator
+internal class CustomHelpTextGenerator : ICustomHelpTextGenerator
 {
     private readonly IReaderRepository _readerRepository;
     private readonly IWriterRepository _writerRepository;

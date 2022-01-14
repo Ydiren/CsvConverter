@@ -14,7 +14,7 @@ using NUnit.Framework;
 namespace CsvConverter.Tests.Csv.Readers;
 
 [TestFixture]
-public class CsvReaderTests : MockBase<CsvReader>
+internal class CsvReaderTests : MockBase<CsvReader>
 {
     protected override void Setup()
     {

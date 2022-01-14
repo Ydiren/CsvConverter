@@ -7,7 +7,7 @@ public interface IJsonSerializationService
     Task Serialize<T>(Stream outputStream, T data);
 }
 
-public class JsonSerializationService : IJsonSerializationService
+internal class JsonSerializationService : IJsonSerializationService
 {
     public async Task Serialize<T>(Stream outputStream, T data)
     {

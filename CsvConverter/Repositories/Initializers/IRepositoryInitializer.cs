@@ -1,6 +1,6 @@
 namespace CsvConverter.Repositories.Initializers;
 
-public interface IRepositoryInitializer
+internal interface IRepositoryInitializer
 {
     void InitializeAll();
 }

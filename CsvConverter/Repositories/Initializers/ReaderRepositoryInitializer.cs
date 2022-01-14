@@ -2,7 +2,7 @@ using CsvConverter.Interfaces;
 
 namespace CsvConverter.Repositories.Initializers;
 
-public class ReaderRepositoryInitializer : IRepositoryInitializer
+internal class ReaderRepositoryInitializer : IRepositoryInitializer
 {
     private readonly IReaderRepository _readerRepository;
     private readonly IEnumerable<IReader> _readers;

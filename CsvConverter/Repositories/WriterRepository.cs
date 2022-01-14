@@ -2,12 +2,12 @@ using CsvConverter.Interfaces;
 
 namespace CsvConverter.Repositories;
 
-public interface IWriterRepository : IRepository<IWriter>
+internal interface IWriterRepository : IRepository<IWriter>
 {
     IEnumerable<string> SupportedTypes { get; }
 }
 
-public class WriterRepository : IWriterRepository
+internal class WriterRepository : IWriterRepository
 {
     private readonly Dictionary<string, IWriter> _writers = new();
 

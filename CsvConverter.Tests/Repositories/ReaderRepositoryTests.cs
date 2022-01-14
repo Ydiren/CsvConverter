@@ -8,7 +8,7 @@ using NUnit.Framework;
 namespace CsvConverter.Tests.Repositories;
 
 [TestFixture]
-public class ReaderRepositoryTests : MockBase<ReaderRepository>
+internal class ReaderRepositoryTests : MockBase<ReaderRepository>
 {
     [Test]
     public void Add_WhenArgumentIsNull_ThrowsArgumentNullException()

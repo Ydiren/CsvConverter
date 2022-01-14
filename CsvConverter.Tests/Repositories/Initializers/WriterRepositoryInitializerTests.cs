@@ -8,7 +8,7 @@ using NUnit.Framework;
 namespace CsvConverter.Tests.Repositories.Initializers;
 
 [TestFixture]
-public class WriterRepositoryInitializerTests : MockBase<WriterRepositoryInitializer>
+internal class WriterRepositoryInitializerTests : MockBase<WriterRepositoryInitializer>
 {
     private readonly List<IWriter> _writers = new();
 

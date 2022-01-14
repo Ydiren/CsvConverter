@@ -3,12 +3,12 @@ using Microsoft.Extensions.Logging;
 
 namespace CsvConverter.Converter;
 
-public interface IConverterService
+internal interface IConverterService
 {
     Task ConvertAsync(ConverterParameters parameters);
 }
 
-public class ConverterService : IConverterService
+internal class ConverterService : IConverterService
 {
     private readonly ILogger<ConverterService> _logger;
     private readonly IReaderRepository _readerRepository;

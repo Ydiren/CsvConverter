@@ -7,7 +7,7 @@ public interface IXmlSerializationService
     void Serialize<T>(Stream outputStream, T data);
 }
 
-public class XmlSerializationService : IXmlSerializationService
+internal class XmlSerializationService : IXmlSerializationService
 {
     public void Serialize<T>(Stream outputStream, T data)
     {

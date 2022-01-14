@@ -6,7 +6,7 @@ using Microsoft.Extensions.Logging;
 
 namespace CsvConverter.Csv.Readers;
 
-public class CsvReader : IReader
+internal class CsvReader : IReader
 {
     private readonly ICsvReaderService _csvReaderService;
     private readonly ILogger<CsvReader> _logger;

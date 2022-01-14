@@ -8,7 +8,7 @@ using NUnit.Framework;
 namespace CsvConverter.Tests.Repositories.Initializers;
 
 [TestFixture]
-public class ReaderRepositoryInitializerTests : MockBase<ReaderRepositoryInitializer>
+internal class ReaderRepositoryInitializerTests : MockBase<ReaderRepositoryInitializer>
 {
     private readonly List<IReader> _readers = new();
 

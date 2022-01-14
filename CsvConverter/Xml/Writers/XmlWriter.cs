@@ -7,7 +7,7 @@ using Microsoft.Extensions.Logging;
 
 namespace CsvConverter.Xml.Writers;
 
-public class XmlWriter : IWriter
+internal class XmlWriter : IWriter
 {
     private readonly IFileSystem _fileSystem;
     private readonly ILogger<XmlWriter> _logger;

@@ -14,7 +14,7 @@ using NUnit.Framework;
 namespace CsvConverter.Tests.Json.Writers;
 
 [TestFixture]
-public class JsonWriterTests : MockBase<JsonWriter>
+internal class JsonWriterTests : MockBase<JsonWriter>
 {
     private Mock<IFileSystem> _mockFileSystem = null!;
     private MemoryStream _fakeFileStream = null!;

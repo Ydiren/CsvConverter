@@ -6,7 +6,7 @@ using Microsoft.Extensions.Logging;
 
 namespace CsvConverter.Json.Writers;
 
-public class JsonWriter : IWriter
+internal class JsonWriter : IWriter
 {
     private readonly IFileSystem _fileSystem;
     private readonly IJsonSerializationService _jsonSerializationService;

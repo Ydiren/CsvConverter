@@ -9,7 +9,7 @@ public interface ICsvReaderService
     Task<IEnumerable<TRecord>> ReadAsync<TRecord>(FileName filename) where TRecord : class;
 }
 
-public class CsvReaderService : ICsvReaderService
+internal class CsvReaderService : ICsvReaderService
 {
     public async Task<IEnumerable<TRecord>> ReadAsync<TRecord>(FileName filename) where TRecord : class
     {

@@ -15,7 +15,7 @@ using NUnit.Framework;
 namespace CsvConverter.Tests.Xml.Writers;
 
 [TestFixture]
-public class XmlWriterTests : MockBase<XmlWriter>
+internal class XmlWriterTests : MockBase<XmlWriter>
 {
     private Mock<IFileSystem> _mockFileSystem = null!;
     private MemoryStream _fakeFileStream = null!;
